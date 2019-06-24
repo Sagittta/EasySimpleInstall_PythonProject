@@ -1,12 +1,16 @@
+# mysql을 사용하기 위해 pymysql을 불러옵니다.
+# round() 함수를 사용하기 위해 math를 불러옵니다.
 import pymysql
 import math
 
 class Star :
+    # 클래스 안에서 conn과 curs 변수를 사용하기 위해 __init__에 추가합니다.
     def __init__(self):
         self.conn = pymysql.connect(host='localhost', user='root', password='mirim2', db='pj_java', charset='utf8')
         self.curs = self.conn.cursor(pymysql.cursors.DictCursor)
         self.st2 = ""
 
+    # 별점과 보완할 점을 입력할 수 있도록 하는 함수입니다.
     def select_sta(self):
         print("-------")
         st1 = int(input("별점의 개수를 입력해주세요. (1 ~ 10) \n : "))
@@ -14,6 +18,7 @@ class Star :
             print("-------")
             print("★"*st1)
             print("-------")
+            # 별이 5개 미만일 경우, 보완할 점을 입력할 수 있습니다.
             if st1 < 5:
                 print("보완할 점을  입력해주세요.(1: Yes, 2: No)")
                 st = int(input(": "))
@@ -36,16 +41,19 @@ class Star :
         else:
             print("프로그램이 종료됩니다.")
 
+        # 별점의 개수와 입력한 보완할 점을 데이터베이스에 넣습니다.
         sql = "insert into star2(count, comment) values (%s, %s)"
         self.curs.execute(sql, (st1, self.st2))
 
         self.conn.commit()
 
+        # 별점 평균을 구하기 위해 데이터베이스에서 별점의 개수의 평균값을 가져옵니다.
         sql = "select avg(count) from star2"
         self.curs.execute(sql)
         a = self.curs.fetchone()
 
         print("\n★별점주기★\n")
+        # 소숫점 2번째 자리까지 출력합니다.
         print(round(a['avg(count)'], 2))
         print("-------")
 
