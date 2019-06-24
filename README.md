@@ -1,0 +1,3 @@
+This program is what I made in 2019, for Python Project.
+First to do is running installWay.py .
+All of these files are connected with mysql, so it would be not work on Github, I think...
