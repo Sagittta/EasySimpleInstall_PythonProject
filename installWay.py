@@ -33,6 +33,7 @@ class installWay :
             elif a1 == 3:
                 self.gu.select_gui()
             elif a1 == 4:
+                # installway.py에서 실행할 때만 보완점 입력 후 에러발생.
                 self.st.select_sta()
             elif a1 == 0:
                 break

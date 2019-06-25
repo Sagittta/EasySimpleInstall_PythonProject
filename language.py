@@ -11,30 +11,37 @@ class Language:
     def print_value(self):
         rows = self.curs.fetchone()
         print("")
+        print("-------")
         for a in rows:
+            if rows[a] is None:
+                break
             print(rows[a])
         print("-------")
         print("")
 
+    # select 명령어를 줍니다.
+    def select_sql(self):
+        self.sql = "select * from installway where proname=%s"
+
     # 각 목적에 맞게 알맞은 데이터베이스를 꺼내오도록 하는 함수입니다.
     def select_lan(self):
         while True:
-            print("설치할 언어를 선택하세요\n1 : Java, 2 : Python, 3 : JQuery, 0 : Exit")
+            print("\n설치할 언어를 선택하세요\n1 : Java, 2 : Python, 3 : JQuery, 0 : Exit")
             la = int(input(": "))
             
             if la == 1 :
-                sql = "select * from installway where proname=%s"
-                self.curs.execute(sql, ('java'))
+                self.select_sql()
+                self.curs.execute(self.sql, ('java'))
                 self.print_value()
 
             elif la == 2 :
-                sql = "select * from installway where proname=%s"
-                self.curs.execute(sql, ('python'))
+                self.select_sql()
+                self.curs.execute(self.sql, ('python'))
                 self.print_value()
 
             elif la == 3 :
-                sql = "select * from installway where proname=%s"
-                self.curs.execute(sql, ('JQuery'))
+                self.select_sql()
+                self.curs.execute(self.sql, ('JQuery'))
                 self.print_value()
                 
             elif la == 0 :
@@ -44,5 +51,5 @@ class Language:
     
         self.conn.close()
 
-# la = Language()
-# la.select_lan()
+#   la = Language()
+#   la.select_lan()
