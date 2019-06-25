@@ -15,10 +15,11 @@ import star
 
 class installWay :
     # 함수를 사용하기 위해 객체를 생성합니다.
-    la = language.Language()
-    pr = program.Program()
-    gu = guitar.Guitar()
-    st = star.Star()
+    def __init__(self):
+        self.la = language.Language()
+        self.pr = program.Program()
+        self.gu = guitar.Guitar()
+        self.st = star.Star()
 
     # 이 함수는 계속 반복하여 실행되어 언어 설치, 프로그램 설치, 기타에 계속 접속할 수 있습니다.
     def select_first(self) :
@@ -33,8 +34,8 @@ class installWay :
             elif a1 == 3:
                 self.gu.select_gui()
             elif a1 == 4:
-                # installway.py에서 실행할 때만 보완점 입력 후 에러발생.
                 self.st.select_sta()
+                break
             elif a1 == 0:
                 break
             else :

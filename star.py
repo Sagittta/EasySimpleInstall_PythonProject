@@ -43,6 +43,7 @@ class Star :
             if st1 < 11 and st1 > 0:
                 print("★"*st1)
             else:
+                st1 = 0
                 print("프로그램이 종료됩니다.")
         else:
             print("프로그램이 종료됩니다.")
@@ -59,9 +60,10 @@ class Star :
 
         print("\n★ 별점평균 ★")
         # 소숫점 2번째 자리까지 출력합니다.
-        print(round(a['avg(count)'], 2))
-        print("-------")
+        if 'avg(count)' is not None:
+            print(round(a['avg(count)'], 2))
+            print("-------")
         self.conn.close()
 
-s = Star()
-s.select_sta()
+# s = Star()
+# s.select_sta()
